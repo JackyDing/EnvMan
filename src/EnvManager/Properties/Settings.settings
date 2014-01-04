@@ -1,0 +1,18 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="EnvManager.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="FrmEditWindowState" Type="System.Windows.Forms.FormWindowState" Scope="User">
+      <Value Profile="(Default)">Normal</Value>
+    </Setting>
+    <Setting Name="FrmEditWindowLocation" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">10, 10</Value>
+    </Setting>
+    <Setting Name="FrmSize" Type="System.Drawing.Size" Scope="User">
+      <Value Profile="(Default)">331, 319</Value>
+    </Setting>
+    <Setting Name="SpliterPosition" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">197</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
