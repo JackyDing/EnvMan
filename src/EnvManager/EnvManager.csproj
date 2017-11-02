@@ -62,6 +62,7 @@
     <Compile Include="Handlers\DgvBrowseFolderCommand.cs" />
     <Compile Include="Handlers\DgvCommand.cs" />
     <Compile Include="Handlers\DgvDeleteCommand.cs" />
+    <Compile Include="Handlers\DgvDeleteDupesCommand.cs" />
     <Compile Include="Handlers\DgvEditCommand.cs" />
     <Compile Include="Handlers\DgvHandler.cs" />
     <Compile Include="EnvManager.cs">
@@ -70,6 +71,7 @@
     <Compile Include="EnvManager.Designer.cs">
       <DependentUpon>EnvManager.cs</DependentUpon>
     </Compile>
+    <Compile Include="Handlers\DgvSortCommand.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
@@ -119,7 +121,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\Cancel.gif" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -148,7 +149,11 @@
     <None Include="Resources\MoveUp.png" />
     <None Include="Resources\MoveTop.png" />
     <None Include="Resources\Delete.png" />
-    <None Include="Resources\New.gif" />
+    <None Include="Resources\Cancel.png" />
+    <None Include="Resources\Dupe.png" />
+    <None Include="Resources\New.png" />
+    <None Include="Resources\shield-uac.png" />
+    <None Include="Resources\Sort.png" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

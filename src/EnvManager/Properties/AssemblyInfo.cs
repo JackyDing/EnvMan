@@ -2,6 +2,7 @@
  * EnvMan - The Open-Source Windows Environment Variables Manager
  * Copyright (C) 2006-2009 Vlad Setchin <envman-dev@googlegroups.com>
  * Copyright (C) 2013 Jacky Ding <jackyfire@gmail.com>
+ * Copyright (C) 2017 evorios <evorioss@gmail.com>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,14 +19,13 @@
 **/
 
 using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("Windows Environment Variables Manager")]
 [assembly: AssemblyProduct("Windows Environment Variables Manager")]
 [assembly: AssemblyDescription("This program is distributed under the terms of the GNU General Public License v3 or later.")]
 [assembly: AssemblyCompany("Anastasia Corporation")]
-[assembly: AssemblyCopyright("Copyright @2006-2009 Vlad Setchin, @2013 Jacky Ding")]
+[assembly: AssemblyCopyright("Copyright @2006-2009 Vlad Setchin, @2013 Jacky Ding, @2017 evorios")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -37,9 +37,9 @@ using System.Runtime.InteropServices;
 // set here build version,
 // use x.x.x.* format for final releases
 // or x.x.x.n format for beta releases
-[assembly: AssemblyVersion("2.0.0.1")]
-[assembly: AssemblyFileVersion("2.0.0.1")]
-[assembly: AssemblyInformationalVersion("2.0.0.1")]
+[assembly: AssemblyVersion("2.0.0.2")]
+[assembly: AssemblyFileVersion("2.0.0.2")]
+[assembly: AssemblyInformationalVersion("2.0.0.2")]
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information

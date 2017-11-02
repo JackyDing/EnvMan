@@ -6,6 +6,9 @@ It is designed to replace Control Panel System Environment Manager and easily ma
 
 HISTORY
 
+02/11/2017  Release 2.0
+    * Implemented sort and delete dublications for PATH
+    * Implemented requesting elevated privileges when it needed
 05/07/2013  Release 2.0 Alpha
     * Remove version check and automated update
 	* Switch to tabbed GUI

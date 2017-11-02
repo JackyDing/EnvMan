@@ -2,6 +2,7 @@
  * EnvMan - The Open-Source Windows Environment Variables Manager
  * Copyright (C) 2006-2009 Vlad Setchin <envman-dev@googlegroups.com>
  * Copyright (C) 2013 Jacky Ding <jackyfire@gmail.com>
+ * Copyright (C) 2013 evorios <evorioss@gmail.com>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,7 +19,6 @@
 **/
 
 
-using EnvManager.Properties;
 
 namespace EnvManager
 {
@@ -111,9 +111,9 @@ namespace EnvManager
             this.btnSnapshotUsrVariables.Enabled = false;
             this.btnSnapshotUsrVariables.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSnapshotUsrVariables.Image = ((System.Drawing.Image)(resources.GetObject("btnSnapshotUsrVariables.Image")));
-            this.btnSnapshotUsrVariables.Location = new System.Drawing.Point(124, 525);
+            this.btnSnapshotUsrVariables.Location = new System.Drawing.Point(124, 571);
             this.btnSnapshotUsrVariables.Name = "btnSnapshotUsrVariables";
-            this.btnSnapshotUsrVariables.Size = new System.Drawing.Size(24, 24);
+            this.btnSnapshotUsrVariables.Size = new System.Drawing.Size(24, 26);
             this.btnSnapshotUsrVariables.TabIndex = 16;
             this.toolTip.SetToolTip(this.btnSnapshotUsrVariables, "Snapshot Variables");
             this.btnSnapshotUsrVariables.UseVisualStyleBackColor = true;
@@ -125,9 +125,9 @@ namespace EnvManager
             this.btnDeleteUsrVariable.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDeleteUsrVariable.Image = ((System.Drawing.Image)(resources.GetObject("btnDeleteUsrVariable.Image")));
             this.btnDeleteUsrVariable.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnDeleteUsrVariable.Location = new System.Drawing.Point(568, 525);
+            this.btnDeleteUsrVariable.Location = new System.Drawing.Point(568, 571);
             this.btnDeleteUsrVariable.Name = "btnDeleteUsrVariable";
-            this.btnDeleteUsrVariable.Size = new System.Drawing.Size(85, 24);
+            this.btnDeleteUsrVariable.Size = new System.Drawing.Size(85, 26);
             this.btnDeleteUsrVariable.TabIndex = 11;
             this.btnDeleteUsrVariable.Text = "&Delete";
             this.toolTip.SetToolTip(this.btnDeleteUsrVariable, "Delete Variable");
@@ -140,9 +140,9 @@ namespace EnvManager
             this.btnEditUsrVariable.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEditUsrVariable.Image = ((System.Drawing.Image)(resources.GetObject("btnEditUsrVariable.Image")));
             this.btnEditUsrVariable.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnEditUsrVariable.Location = new System.Drawing.Point(468, 525);
+            this.btnEditUsrVariable.Location = new System.Drawing.Point(468, 571);
             this.btnEditUsrVariable.Name = "btnEditUsrVariable";
-            this.btnEditUsrVariable.Size = new System.Drawing.Size(85, 24);
+            this.btnEditUsrVariable.Size = new System.Drawing.Size(85, 26);
             this.btnEditUsrVariable.TabIndex = 10;
             this.btnEditUsrVariable.Text = "&Edit";
             this.toolTip.SetToolTip(this.btnEditUsrVariable, "Edit Variable");
@@ -155,9 +155,9 @@ namespace EnvManager
             this.btnNewUsrVariable.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnNewUsrVariable.Image = ((System.Drawing.Image)(resources.GetObject("btnNewUsrVariable.Image")));
             this.btnNewUsrVariable.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnNewUsrVariable.Location = new System.Drawing.Point(368, 525);
+            this.btnNewUsrVariable.Location = new System.Drawing.Point(368, 571);
             this.btnNewUsrVariable.Name = "btnNewUsrVariable";
-            this.btnNewUsrVariable.Size = new System.Drawing.Size(85, 24);
+            this.btnNewUsrVariable.Size = new System.Drawing.Size(85, 26);
             this.btnNewUsrVariable.TabIndex = 9;
             this.btnNewUsrVariable.Text = "&New";
             this.toolTip.SetToolTip(this.btnNewUsrVariable, "Create New Variable");
@@ -170,9 +170,9 @@ namespace EnvManager
             this.btnSnapshotSysVariables.Enabled = false;
             this.btnSnapshotSysVariables.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSnapshotSysVariables.Image = ((System.Drawing.Image)(resources.GetObject("btnSnapshotSysVariables.Image")));
-            this.btnSnapshotSysVariables.Location = new System.Drawing.Point(124, 525);
+            this.btnSnapshotSysVariables.Location = new System.Drawing.Point(124, 571);
             this.btnSnapshotSysVariables.Name = "btnSnapshotSysVariables";
-            this.btnSnapshotSysVariables.Size = new System.Drawing.Size(24, 24);
+            this.btnSnapshotSysVariables.Size = new System.Drawing.Size(24, 26);
             this.btnSnapshotSysVariables.TabIndex = 17;
             this.toolTip.SetToolTip(this.btnSnapshotSysVariables, "Snapshot Variables");
             this.btnSnapshotSysVariables.UseVisualStyleBackColor = true;
@@ -184,9 +184,9 @@ namespace EnvManager
             this.btnDeleteSysVariable.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDeleteSysVariable.Image = ((System.Drawing.Image)(resources.GetObject("btnDeleteSysVariable.Image")));
             this.btnDeleteSysVariable.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnDeleteSysVariable.Location = new System.Drawing.Point(569, 525);
+            this.btnDeleteSysVariable.Location = new System.Drawing.Point(569, 571);
             this.btnDeleteSysVariable.Name = "btnDeleteSysVariable";
-            this.btnDeleteSysVariable.Size = new System.Drawing.Size(84, 24);
+            this.btnDeleteSysVariable.Size = new System.Drawing.Size(84, 26);
             this.btnDeleteSysVariable.TabIndex = 16;
             this.btnDeleteSysVariable.Text = "De&lete";
             this.toolTip.SetToolTip(this.btnDeleteSysVariable, "Delete Variable");
@@ -199,9 +199,9 @@ namespace EnvManager
             this.btnEditSysVariable.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEditSysVariable.Image = ((System.Drawing.Image)(resources.GetObject("btnEditSysVariable.Image")));
             this.btnEditSysVariable.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnEditSysVariable.Location = new System.Drawing.Point(469, 525);
+            this.btnEditSysVariable.Location = new System.Drawing.Point(469, 571);
             this.btnEditSysVariable.Name = "btnEditSysVariable";
-            this.btnEditSysVariable.Size = new System.Drawing.Size(84, 24);
+            this.btnEditSysVariable.Size = new System.Drawing.Size(84, 26);
             this.btnEditSysVariable.TabIndex = 15;
             this.btnEditSysVariable.Text = "Ed&it";
             this.toolTip.SetToolTip(this.btnEditSysVariable, "Edit Variable");
@@ -214,9 +214,9 @@ namespace EnvManager
             this.btnNewSysVariable.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnNewSysVariable.Image = ((System.Drawing.Image)(resources.GetObject("btnNewSysVariable.Image")));
             this.btnNewSysVariable.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnNewSysVariable.Location = new System.Drawing.Point(369, 525);
+            this.btnNewSysVariable.Location = new System.Drawing.Point(369, 571);
             this.btnNewSysVariable.Name = "btnNewSysVariable";
-            this.btnNewSysVariable.Size = new System.Drawing.Size(84, 24);
+            this.btnNewSysVariable.Size = new System.Drawing.Size(84, 26);
             this.btnNewSysVariable.TabIndex = 14;
             this.btnNewSysVariable.Text = "Ne&w";
             this.toolTip.SetToolTip(this.btnNewSysVariable, "Create New Variable");
@@ -232,7 +232,7 @@ namespace EnvManager
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(828, 588);
+            this.tabControl1.Size = new System.Drawing.Size(828, 637);
             this.tabControl1.TabIndex = 10;
             // 
             // tabPage1
@@ -241,7 +241,7 @@ namespace EnvManager
             this.tabPage1.Location = new System.Drawing.Point(4, 26);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(820, 558);
+            this.tabPage1.Size = new System.Drawing.Size(820, 607);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "User Variables";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -259,7 +259,7 @@ namespace EnvManager
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.tableLayoutPanel3);
-            this.splitContainer1.Size = new System.Drawing.Size(814, 552);
+            this.splitContainer1.Size = new System.Drawing.Size(814, 601);
             this.splitContainer1.SplitterDistance = 151;
             this.splitContainer1.SplitterWidth = 2;
             this.splitContainer1.TabIndex = 22;
@@ -277,8 +277,8 @@ namespace EnvManager
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 2;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(151, 552);
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 33F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(151, 601);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // lbUsrVariables
@@ -292,7 +292,7 @@ namespace EnvManager
             this.lbUsrVariables.ItemHeight = 21;
             this.lbUsrVariables.Location = new System.Drawing.Point(3, 3);
             this.lbUsrVariables.Name = "lbUsrVariables";
-            this.lbUsrVariables.Size = new System.Drawing.Size(145, 516);
+            this.lbUsrVariables.Size = new System.Drawing.Size(145, 562);
             this.lbUsrVariables.TabIndex = 22;
             this.lbUsrVariables.SelectedIndexChanged += new System.EventHandler(this.lbUsrVariables_SelectedIndexChanged);
             // 
@@ -302,20 +302,20 @@ namespace EnvManager
             this.activateToolStripMenuItem,
             this.deleteToolStripMenuItem});
             this.cmsSnapshot.Name = "cmsSnapshot";
-            this.cmsSnapshot.Size = new System.Drawing.Size(120, 48);
+            this.cmsSnapshot.Size = new System.Drawing.Size(118, 48);
             this.cmsSnapshot.Opening += new System.ComponentModel.CancelEventHandler(this.cmsSnapshot_Opening);
             // 
             // activateToolStripMenuItem
             // 
             this.activateToolStripMenuItem.Name = "activateToolStripMenuItem";
-            this.activateToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
+            this.activateToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
             this.activateToolStripMenuItem.Text = "&Activate";
             this.activateToolStripMenuItem.Click += new System.EventHandler(this.activateToolStripMenuItem_Click);
             // 
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
             this.deleteToolStripMenuItem.Text = "&Delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
@@ -324,7 +324,7 @@ namespace EnvManager
             this.tbSnapshotUsrVariables.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbSnapshotUsrVariables.Location = new System.Drawing.Point(3, 525);
+            this.tbSnapshotUsrVariables.Location = new System.Drawing.Point(3, 571);
             this.tbSnapshotUsrVariables.Name = "tbSnapshotUsrVariables";
             this.tbSnapshotUsrVariables.Size = new System.Drawing.Size(115, 25);
             this.tbSnapshotUsrVariables.TabIndex = 23;
@@ -346,8 +346,8 @@ namespace EnvManager
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 2;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(661, 552);
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 33F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(661, 601);
             this.tableLayoutPanel3.TabIndex = 0;
             // 
             // dgvUsrVariables
@@ -369,7 +369,7 @@ namespace EnvManager
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dgvUsrVariables.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvUsrVariables.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvUsrVariables.Size = new System.Drawing.Size(655, 516);
+            this.dgvUsrVariables.Size = new System.Drawing.Size(655, 562);
             this.dgvUsrVariables.TabIndex = 21;
             this.dgvUsrVariables.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DgvCellMouseDoubleClick);
             this.dgvUsrVariables.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.dgvUsrVariables_RowsRemoved);
@@ -400,7 +400,7 @@ namespace EnvManager
             this.tabPage2.Location = new System.Drawing.Point(4, 26);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(820, 558);
+            this.tabPage2.Size = new System.Drawing.Size(820, 607);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "System Variables";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -418,7 +418,7 @@ namespace EnvManager
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.tableLayoutPanel1);
-            this.splitContainer2.Size = new System.Drawing.Size(814, 552);
+            this.splitContainer2.Size = new System.Drawing.Size(814, 601);
             this.splitContainer2.SplitterDistance = 151;
             this.splitContainer2.SplitterWidth = 2;
             this.splitContainer2.TabIndex = 14;
@@ -436,8 +436,8 @@ namespace EnvManager
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 2;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(151, 552);
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 33F));
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(151, 601);
             this.tableLayoutPanel4.TabIndex = 1;
             // 
             // lbSysVariables
@@ -451,7 +451,7 @@ namespace EnvManager
             this.lbSysVariables.ItemHeight = 21;
             this.lbSysVariables.Location = new System.Drawing.Point(3, 3);
             this.lbSysVariables.Name = "lbSysVariables";
-            this.lbSysVariables.Size = new System.Drawing.Size(145, 516);
+            this.lbSysVariables.Size = new System.Drawing.Size(145, 562);
             this.lbSysVariables.TabIndex = 22;
             this.lbSysVariables.SelectedIndexChanged += new System.EventHandler(this.lbSysbVariables_SelectedIndexChanged);
             // 
@@ -461,7 +461,7 @@ namespace EnvManager
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbSnapshotSysVariables.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.tbSnapshotSysVariables.Location = new System.Drawing.Point(3, 525);
+            this.tbSnapshotSysVariables.Location = new System.Drawing.Point(3, 571);
             this.tbSnapshotSysVariables.Name = "tbSnapshotSysVariables";
             this.tbSnapshotSysVariables.Size = new System.Drawing.Size(115, 25);
             this.tbSnapshotSysVariables.TabIndex = 23;
@@ -483,8 +483,8 @@ namespace EnvManager
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(661, 552);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 33F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(661, 601);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
             // dgvSysVariables
@@ -506,7 +506,7 @@ namespace EnvManager
             dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dgvSysVariables.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvSysVariables.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvSysVariables.Size = new System.Drawing.Size(655, 516);
+            this.dgvSysVariables.Size = new System.Drawing.Size(655, 562);
             this.dgvSysVariables.TabIndex = 11;
             this.dgvSysVariables.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DgvCellMouseDoubleClick);
             this.dgvSysVariables.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.dgvSysVariables_RowsRemoved);
@@ -533,11 +533,11 @@ namespace EnvManager
             // 
             // EnvManager
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tabControl1);
             this.Name = "EnvManager";
-            this.Size = new System.Drawing.Size(828, 588);
+            this.Size = new System.Drawing.Size(828, 637);
             this.Load += new System.EventHandler(this.EnvManager_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);

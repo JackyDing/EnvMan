@@ -8,6 +8,8 @@ It is designed to replace Control Panel System Environment Manager and easily ma
 - Tab based GUI
 - Support environment varaibles snapshot
 - Support Cut, Copy, Paste on editing environment variable
+- Support Sort and Delete dublications for PATH
+- Support requesting elevated privileges if it needed
 
 ## To do
 - Support operations through command line

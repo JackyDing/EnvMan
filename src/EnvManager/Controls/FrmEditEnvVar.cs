@@ -2,6 +2,7 @@
  * EnvMan - The Open-Source Windows Environment Variables Manager
  * Copyright (C) 2006-2009 Vlad Setchin <envman-dev@googlegroups.com>
  * Copyright (C) 2013 Jacky Ding <jackyfire@gmail.com>
+ * Copyright (C) 2013 evorios <evorioss@gmail.com>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,10 +19,8 @@
 **/
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Text;
 using System.IO;
@@ -108,6 +107,11 @@ namespace EnvManager.Controls
             openFileDialog.DefaultExt = DEFAULT_FILTER_EXTENSION;
             saveFileDialog.Filter = FILE_FILTER;
             saveFileDialog.DefaultExt = DEFAULT_FILTER_EXTENSION;
+
+            if(EnvironmentVariableManager.IsElevated)
+                btnSave.Image = Resources.Save;
+            else
+                btnSave.Image = Resources.shield_uac;
         }
 
         /// <summary>
@@ -200,6 +204,14 @@ namespace EnvManager.Controls
             {
                 dgvValuesList_UserDeletingRow(null, null);
             }
+            else if (sender.Equals(btnDelDupes))
+            {
+                dgvValuesList_UserDeletingDupedRows();
+            }
+            else if (sender.Equals(btnSortValues))
+            {
+                dgvValuesList_UserSortRows();
+            }
             else if (sender.Equals(btnBrowse))
             {
                 BrowseFolder();
@@ -284,8 +296,11 @@ namespace EnvManager.Controls
                     dgvHandler.SetRowValue(rowIndex, selectedPath);
                     dgvHandler.SetRowIcon( rowIndex, selectedPath );
                 }
-                browseFolderCommand.NewRow = dgvValuesList.Rows[ rowIndex ];
-                AddCommand(browseFolderCommand);
+                if (rowIndex >= 0)
+                {
+                    browseFolderCommand.NewRow = dgvValuesList.Rows[rowIndex];
+                    AddCommand(browseFolderCommand);
+                }
             }
         }
         /// <summary>
@@ -438,16 +453,16 @@ namespace EnvManager.Controls
                 {
                     if (snapshot.Name == "[Current]")
                     {
-                        EnvironmentVariableManager.Begin();
+                        EnvironmentVariableManager.Begin(snapshot.Target);
                         EnvironmentVariableManager.DeleteEnvironmentVariable(variable.Name, snapshot.Target);
-                        EnvironmentVariableManager.End();
+                        EnvironmentVariableManager.End(snapshot.Target);
                     }
                 }
                 if (snapshot.Name == "[Current]")
                 {
-                    EnvironmentVariableManager.Begin();
+                    EnvironmentVariableManager.Begin(snapshot.Target);
                     EnvironmentVariableManager.SetEnvironmentVariable(txtVariableName.Text, value.ToString(), snapshot.Target);
-                    EnvironmentVariableManager.End();
+                    EnvironmentVariableManager.End(snapshot.Target);
                 }
                 variable.Name = txtVariableName.Text;
                 variable.Value = value.ToString();
@@ -650,6 +665,29 @@ namespace EnvManager.Controls
 
                 AddCommand(command); 
             }
+        }
+
+        private void dgvValuesList_UserDeletingDupedRows()
+        {
+            List<string> orig = new List<string>();
+            List<int> indexes = new List<int>();
+            for (var i = 0; i < dgvValuesList.Rows.Count; i++)
+            {
+                var val = dgvValuesList[1, i].Value as string;
+                if (val == null) continue;
+                if (val[val.Length - 1] == '/' || val[val.Length - 1] == '\\')
+                    val = val.Substring(0, val.Length - 1);
+                if (!orig.Contains(val))
+                    orig.Add(val);
+                else
+                    indexes.Add(i);
+            }
+            AddCommand(new DgvDeleteDupesCommand(dgvHandler, indexes));
+        }
+
+        private void dgvValuesList_UserSortRows()
+        {
+            AddCommand(new DgvSortCommand(dgvHandler, dgvValuesList.Rows.Count));
         }
 
         private void cmsValuesDGV_Opening(object sender, CancelEventArgs e)
