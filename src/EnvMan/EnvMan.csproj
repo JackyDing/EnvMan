@@ -118,10 +118,10 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Resources\ShutDown.PNG" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\EnvMan.ico" />
+    <None Include="Resources\EnvMan.ico" />
+    <None Include="Resources\EnvManExit.png" />
     <None Include="Resources\EnvManAbout.png" />
     <None Include="Resources\EnvMan.png" />
   </ItemGroup>

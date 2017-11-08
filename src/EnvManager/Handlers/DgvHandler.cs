@@ -2,6 +2,7 @@
  * EnvMan - The Open-Source Windows Environment Variables Manager
  * Copyright (C) 2006-2009 Vlad Setchin <envman-dev@googlegroups.com>
  * Copyright (C) 2013 Jacky Ding <jackyfire@gmail.com>
+ * Copyright (C) 2013 evorios <evorioss@gmail.com>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,7 +20,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Drawing;
 using System.Windows.Forms;
 using EnvManager.Validator;
@@ -80,6 +80,20 @@ namespace EnvManager.Handlers
                 MessageBox.Show( ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error );
             }
         }
+        public void DeleteAllRows()
+        {
+            try
+            {
+                while (dgv.Rows.Count > 1)
+                {
+                    dgv.Rows.RemoveAt(0);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
         /// <summary>
         /// Returns Icon corresponding the type of the variable
         /// Added by Mariusz Ficek
@@ -128,6 +142,7 @@ namespace EnvManager.Handlers
         /// <param name="rowIndex">Index of the row.</param>
         public void SetRowIcon ( int rowIndex, string varValue )
         {
+            if (varValue == null) return;
             string value = Environment.ExpandEnvironmentVariables(varValue);
             string toolTipMsg = "";
             DataGridViewCell cell = dgv.Rows[ rowIndex ].Cells[ 0 ];
@@ -163,6 +178,7 @@ namespace EnvManager.Handlers
         /// <param name="varValue">The variable value.</param>
         public int AddRow ( string varValue )
         {
+            if (varValue == null) return -1;
             int rowIndex = dgv.Rows.Add();
 
             SetRowValue( rowIndex, varValue );
@@ -178,6 +194,13 @@ namespace EnvManager.Handlers
             foreach ( string value in values )
             {
                 this.AddRow( value );
+            }
+        }
+        public void AddRows(List<DataGridViewRow> varRows)
+        {
+            foreach (var row in varRows)
+            {
+                this.AddRow(row.Cells[1].Value as string);
             }
         }
         public void AddRows( string varValues, bool markAsAdded)

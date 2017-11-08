@@ -2,6 +2,7 @@
  * EnvMan - The Open-Source Windows Environment Variables Manager
  * Copyright (C) 2006-2009 Vlad Setchin <envman-dev@googlegroups.com>
  * Copyright (C) 2013 Jacky Ding <jackyfire@gmail.com>
+ * Copyright (C) 2013 evorios <evorioss@gmail.com>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,8 +23,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Text;
 using System.Windows.Forms;
 using EnvManager.Controls;
 using EnvManager.Variable;
@@ -129,13 +128,13 @@ namespace EnvManager
                     {
                         try
                         {
-                            EnvironmentVariableManager.Begin();
+                            EnvironmentVariableManager.Begin(snapshot.Target);
                             foreach (var variable in variables)
                             {
                                 EnvironmentVariableManager.DeleteEnvironmentVariable(variable.Name, snapshot.Target);
                                 snapshot.Variables.Remove(variable);
                             }
-                            EnvironmentVariableManager.End();
+                            EnvironmentVariableManager.End(snapshot.Target);
                         }
                         catch (Exception ex)
                         {
@@ -241,7 +240,7 @@ namespace EnvManager
                 EnvironmentSnapshot current = snapshotManager.GetSnapshot(0, target);
                 if (snapshot != null)
                 {
-                    EnvironmentVariableManager.Begin();
+                    EnvironmentVariableManager.Begin(snapshot.Target);
                     foreach (var variable in current.Variables)
                     {
                         EnvironmentVariableManager.DeleteEnvironmentVariable(variable.Name, target);
@@ -252,7 +251,7 @@ namespace EnvManager
                         EnvironmentVariableManager.SetEnvironmentVariable(variable.Name, variable.Value, target);
                         current.Variables.Add(variable.Clone() as EnvironmentVariable);
                     }
-                    EnvironmentVariableManager.End();
+                    EnvironmentVariableManager.End(snapshot.Target);
                     lb.SelectedIndex = 0;
                 }
             }
@@ -460,7 +459,7 @@ namespace EnvManager
                 snapshot = DgvSnapshot(lbUsrVariables, dgvUsrVariables);
                 if (snapshot.Name == "[Current]")
                 {
-                    EnvironmentVariableManager.Begin();
+                    EnvironmentVariableManager.Begin(snapshot.Target);
                 }
             }
             var variable = snapshot.Variables[e.Row.Index];
@@ -477,7 +476,7 @@ namespace EnvManager
             {
                 if (snapshot.Name == "[Current]")
                 {
-                    EnvironmentVariableManager.End();
+                    EnvironmentVariableManager.End(snapshot.Target);
                 }
                 snapshotManager.SaveSnapshot(ref snapshot);
                 FillEnvironmentVariables(dgvUsrVariables, snapshot);
@@ -500,7 +499,7 @@ namespace EnvManager
                 snapshot = DgvSnapshot(lbSysVariables, dgvSysVariables);
                 if (snapshot.Name == "[Current]")
                 {
-                    EnvironmentVariableManager.Begin();
+                    EnvironmentVariableManager.Begin(snapshot.Target);
                 }
             }
             var variable = snapshot.Variables[e.Row.Index];
@@ -517,7 +516,7 @@ namespace EnvManager
             {
                 if (snapshot.Name == "[Current]")
                 {
-                    EnvironmentVariableManager.End();
+                    EnvironmentVariableManager.End(snapshot.Target);
                 }
                 snapshotManager.SaveSnapshot(ref snapshot);
                 FillEnvironmentVariables(dgvSysVariables, snapshot);

@@ -2,6 +2,7 @@
  * EnvMan - The Open-Source Windows Environment Variables Manager
  * Copyright (C) 2006-2009 Vlad Setchin <envman-dev@googlegroups.com>
  * Copyright (C) 2013 Jacky Ding <jackyfire@gmail.com>
+ * Copyright (C) 2013 evorios <evorioss@gmail.com>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -75,6 +76,8 @@ namespace EnvManager.Controls
             this.btnUndo = new System.Windows.Forms.Button();
             this.btnRedo = new System.Windows.Forms.Button();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.btnDelDupes = new System.Windows.Forms.Button();
+            this.btnSortValues = new System.Windows.Forms.Button();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.dgvValuesList)).BeginInit();
@@ -88,7 +91,7 @@ namespace EnvManager.Controls
             this.label1.Location = new System.Drawing.Point(12, 8);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(91, 13);
-            this.label1.TabIndex = 1;
+            this.label1.TabIndex = 0;
             this.label1.Text = "Variable &name:";
             // 
             // txtVariableName
@@ -96,7 +99,7 @@ namespace EnvManager.Controls
             this.txtVariableName.Location = new System.Drawing.Point(103, 6);
             this.txtVariableName.Name = "txtVariableName";
             this.txtVariableName.Size = new System.Drawing.Size(177, 21);
-            this.txtVariableName.TabIndex = 3;
+            this.txtVariableName.TabIndex = 1;
             this.txtVariableName.TextChanged += new System.EventHandler(this.txtVariableName_TextChanged);
             this.txtVariableName.Validated += new System.EventHandler(this.txtVariableName_Validated);
             // 
@@ -125,7 +128,7 @@ namespace EnvManager.Controls
             this.dgvValuesList.Name = "dgvValuesList";
             this.dgvValuesList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvValuesList.Size = new System.Drawing.Size(570, 323);
-            this.dgvValuesList.TabIndex = 0;
+            this.dgvValuesList.TabIndex = 2;
             this.dgvValuesList.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dgvValuesList_CellBeginEdit);
             this.dgvValuesList.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvValuesList_CellEndEdit);
             this.dgvValuesList.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvValuesList_CellMouseDown);
@@ -190,11 +193,84 @@ namespace EnvManager.Controls
             this.tsmiLocate.Text = "Locate";
             this.tsmiLocate.Click += new System.EventHandler(this.BtnClick);
             // 
+            // btnImport
+            // 
+            this.btnImport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnImport.Image = global::EnvManager.Properties.Resources.Import;
+            this.btnImport.Location = new System.Drawing.Point(588, 36);
+            this.btnImport.Name = "btnImport";
+            this.btnImport.Size = new System.Drawing.Size(24, 21);
+            this.btnImport.TabIndex = 5;
+            this.toolTip.SetToolTip(this.btnImport, "Import");
+            this.btnImport.UseVisualStyleBackColor = true;
+            this.btnImport.Click += new System.EventHandler(this.BtnClick);
+            // 
+            // btnExport
+            // 
+            this.btnExport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnExport.Image = global::EnvManager.Properties.Resources.Export;
+            this.btnExport.Location = new System.Drawing.Point(588, 62);
+            this.btnExport.Name = "btnExport";
+            this.btnExport.Size = new System.Drawing.Size(24, 21);
+            this.btnExport.TabIndex = 6;
+            this.toolTip.SetToolTip(this.btnExport, "Export");
+            this.btnExport.UseVisualStyleBackColor = true;
+            this.btnExport.Click += new System.EventHandler(this.BtnClick);
+            // 
+            // btnMoveTop
+            // 
+            this.btnMoveTop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnMoveTop.Image = global::EnvManager.Properties.Resources.MoveTop;
+            this.btnMoveTop.Location = new System.Drawing.Point(588, 88);
+            this.btnMoveTop.Name = "btnMoveTop";
+            this.btnMoveTop.Size = new System.Drawing.Size(24, 21);
+            this.btnMoveTop.TabIndex = 7;
+            this.toolTip.SetToolTip(this.btnMoveTop, "Move to the top");
+            this.btnMoveTop.UseVisualStyleBackColor = true;
+            this.btnMoveTop.Click += new System.EventHandler(this.BtnClick);
+            // 
+            // btnMoveUp
+            // 
+            this.btnMoveUp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnMoveUp.Image = global::EnvManager.Properties.Resources.MoveUp;
+            this.btnMoveUp.Location = new System.Drawing.Point(588, 114);
+            this.btnMoveUp.Name = "btnMoveUp";
+            this.btnMoveUp.Size = new System.Drawing.Size(24, 21);
+            this.btnMoveUp.TabIndex = 8;
+            this.toolTip.SetToolTip(this.btnMoveUp, "Move up");
+            this.btnMoveUp.UseVisualStyleBackColor = true;
+            this.btnMoveUp.Click += new System.EventHandler(this.BtnClick);
+            // 
+            // btnMoveDown
+            // 
+            this.btnMoveDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnMoveDown.Image = global::EnvManager.Properties.Resources.MoveDown;
+            this.btnMoveDown.Location = new System.Drawing.Point(588, 140);
+            this.btnMoveDown.Name = "btnMoveDown";
+            this.btnMoveDown.Size = new System.Drawing.Size(24, 21);
+            this.btnMoveDown.TabIndex = 9;
+            this.btnMoveDown.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.toolTip.SetToolTip(this.btnMoveDown, "Move down");
+            this.btnMoveDown.UseVisualStyleBackColor = true;
+            this.btnMoveDown.Click += new System.EventHandler(this.BtnClick);
+            // 
+            // btnMoveBottom
+            // 
+            this.btnMoveBottom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnMoveBottom.Image = global::EnvManager.Properties.Resources.MoveBottom;
+            this.btnMoveBottom.Location = new System.Drawing.Point(588, 166);
+            this.btnMoveBottom.Name = "btnMoveBottom";
+            this.btnMoveBottom.Size = new System.Drawing.Size(24, 21);
+            this.btnMoveBottom.TabIndex = 10;
+            this.toolTip.SetToolTip(this.btnMoveBottom, "Move to bottom");
+            this.btnMoveBottom.UseVisualStyleBackColor = true;
+            this.btnMoveBottom.Click += new System.EventHandler(this.BtnClick);
+            // 
             // btnBrowse
             // 
             this.btnBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnBrowse.Image = global::EnvManager.Properties.Resources.ValTypeFolder;
-            this.btnBrowse.Location = new System.Drawing.Point(588, 208);
+            this.btnBrowse.Location = new System.Drawing.Point(588, 192);
             this.btnBrowse.Name = "btnBrowse";
             this.btnBrowse.Size = new System.Drawing.Size(24, 21);
             this.btnBrowse.TabIndex = 11;
@@ -202,70 +278,65 @@ namespace EnvManager.Controls
             this.btnBrowse.UseVisualStyleBackColor = true;
             this.btnBrowse.Click += new System.EventHandler(this.BtnClick);
             // 
-            // btnMoveTop
+            // btnDelete
             // 
-            this.btnMoveTop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnMoveTop.Image = global::EnvManager.Properties.Resources.MoveTop;
-            this.btnMoveTop.Location = new System.Drawing.Point(588, 102);
-            this.btnMoveTop.Name = "btnMoveTop";
-            this.btnMoveTop.Size = new System.Drawing.Size(24, 21);
-            this.btnMoveTop.TabIndex = 9;
-            this.toolTip.SetToolTip(this.btnMoveTop, "Move to the top");
-            this.btnMoveTop.UseVisualStyleBackColor = true;
-            this.btnMoveTop.Click += new System.EventHandler(this.BtnClick);
+            this.btnDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDelete.Image = global::EnvManager.Properties.Resources.delete;
+            this.btnDelete.Location = new System.Drawing.Point(588, 218);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(24, 21);
+            this.btnDelete.TabIndex = 12;
+            this.toolTip.SetToolTip(this.btnDelete, "Delete Value");
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.BtnClick);
             // 
-            // btnMoveBottom
+            // btnDelDupes
             // 
-            this.btnMoveBottom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnMoveBottom.Image = global::EnvManager.Properties.Resources.MoveBottom;
-            this.btnMoveBottom.Location = new System.Drawing.Point(588, 181);
-            this.btnMoveBottom.Name = "btnMoveBottom";
-            this.btnMoveBottom.Size = new System.Drawing.Size(24, 21);
-            this.btnMoveBottom.TabIndex = 8;
-            this.toolTip.SetToolTip(this.btnMoveBottom, "Move to bottom");
-            this.btnMoveBottom.UseVisualStyleBackColor = true;
-            this.btnMoveBottom.Click += new System.EventHandler(this.BtnClick);
+            this.btnDelDupes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDelDupes.Image = global::EnvManager.Properties.Resources.Dupe;
+            this.btnDelDupes.Location = new System.Drawing.Point(588, 244);
+            this.btnDelDupes.Name = "btnDelDupes";
+            this.btnDelDupes.Size = new System.Drawing.Size(24, 21);
+            this.btnDelDupes.TabIndex = 13;
+            this.toolTip.SetToolTip(this.btnDelDupes, "Delete Duplicated Values");
+            this.btnDelDupes.UseVisualStyleBackColor = true;
+            this.btnDelDupes.Click += new System.EventHandler(this.BtnClick);
             // 
-            // btnMoveDown
+            // btnSortValues
             // 
-            this.btnMoveDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnMoveDown.Image = global::EnvManager.Properties.Resources.MoveDown;
-            this.btnMoveDown.Location = new System.Drawing.Point(588, 155);
-            this.btnMoveDown.Name = "btnMoveDown";
-            this.btnMoveDown.Size = new System.Drawing.Size(24, 21);
-            this.btnMoveDown.TabIndex = 7;
-            this.btnMoveDown.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.toolTip.SetToolTip(this.btnMoveDown, "Move down");
-            this.btnMoveDown.UseVisualStyleBackColor = true;
-            this.btnMoveDown.Click += new System.EventHandler(this.BtnClick);
+            this.btnSortValues.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSortValues.Image = global::EnvManager.Properties.Resources.Sort;
+            this.btnSortValues.Location = new System.Drawing.Point(588, 270);
+            this.btnSortValues.Name = "btnSortValues";
+            this.btnSortValues.Size = new System.Drawing.Size(24, 21);
+            this.btnSortValues.TabIndex = 14;
+            this.toolTip.SetToolTip(this.btnSortValues, "Sort Values");
+            this.btnSortValues.UseVisualStyleBackColor = true;
+            this.btnSortValues.Click += new System.EventHandler(this.BtnClick);
             // 
-            // btnMoveUp
+            // btnUndo
             // 
-            this.btnMoveUp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnMoveUp.Image = global::EnvManager.Properties.Resources.MoveUp;
-            this.btnMoveUp.Location = new System.Drawing.Point(588, 128);
-            this.btnMoveUp.Name = "btnMoveUp";
-            this.btnMoveUp.Size = new System.Drawing.Size(24, 21);
-            this.btnMoveUp.TabIndex = 6;
-            this.toolTip.SetToolTip(this.btnMoveUp, "Move up");
-            this.btnMoveUp.UseVisualStyleBackColor = true;
-            this.btnMoveUp.Click += new System.EventHandler(this.BtnClick);
+            this.btnUndo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnUndo.Image = global::EnvManager.Properties.Resources.Undo;
+            this.btnUndo.Location = new System.Drawing.Point(588, 296);
+            this.btnUndo.Name = "btnUndo";
+            this.btnUndo.Size = new System.Drawing.Size(24, 21);
+            this.btnUndo.TabIndex = 15;
+            this.toolTip.SetToolTip(this.btnUndo, "Undo");
+            this.btnUndo.UseVisualStyleBackColor = true;
+            this.btnUndo.Click += new System.EventHandler(this.BtnClick);
             // 
-            // btnCancel
+            // btnRedo
             // 
-            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancel.Image = global::EnvManager.Properties.Resources.Cancel;
-            this.btnCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCancel.Location = new System.Drawing.Point(499, 359);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(83, 21);
-            this.btnCancel.TabIndex = 5;
-            this.btnCancel.Text = "&Cancel";
-            this.toolTip.SetToolTip(this.btnCancel, "Cancel Changes (Alt+F4)");
-            this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.BtnClick);
+            this.btnRedo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnRedo.Image = global::EnvManager.Properties.Resources.Redo;
+            this.btnRedo.Location = new System.Drawing.Point(588, 322);
+            this.btnRedo.Name = "btnRedo";
+            this.btnRedo.Size = new System.Drawing.Size(24, 21);
+            this.btnRedo.TabIndex = 16;
+            this.toolTip.SetToolTip(this.btnRedo, "Redo");
+            this.btnRedo.UseVisualStyleBackColor = true;
+            this.btnRedo.Click += new System.EventHandler(this.BtnClick);
             // 
             // btnSave
             // 
@@ -277,71 +348,27 @@ namespace EnvManager.Controls
             this.btnSave.Location = new System.Drawing.Point(413, 359);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(83, 21);
-            this.btnSave.TabIndex = 4;
+            this.btnSave.TabIndex = 3;
             this.btnSave.Text = "&Save";
             this.toolTip.SetToolTip(this.btnSave, "Save Changes");
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.BtnClick);
             // 
-            // btnDelete
+            // btnCancel
             // 
-            this.btnDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDelete.Image = global::EnvManager.Properties.Resources.delete;
-            this.btnDelete.Location = new System.Drawing.Point(588, 234);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(24, 21);
-            this.btnDelete.TabIndex = 12;
-            this.toolTip.SetToolTip(this.btnDelete, "Delete Value");
-            this.btnDelete.UseVisualStyleBackColor = true;
-            this.btnDelete.Click += new System.EventHandler(this.BtnClick);
-            // 
-            // btnImport
-            // 
-            this.btnImport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnImport.Image = global::EnvManager.Properties.Resources.Import;
-            this.btnImport.Location = new System.Drawing.Point(588, 36);
-            this.btnImport.Name = "btnImport";
-            this.btnImport.Size = new System.Drawing.Size(24, 21);
-            this.btnImport.TabIndex = 14;
-            this.toolTip.SetToolTip(this.btnImport, "Import");
-            this.btnImport.UseVisualStyleBackColor = true;
-            this.btnImport.Click += new System.EventHandler(this.BtnClick);
-            // 
-            // btnExport
-            // 
-            this.btnExport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnExport.Image = global::EnvManager.Properties.Resources.Export;
-            this.btnExport.Location = new System.Drawing.Point(588, 63);
-            this.btnExport.Name = "btnExport";
-            this.btnExport.Size = new System.Drawing.Size(24, 21);
-            this.btnExport.TabIndex = 13;
-            this.toolTip.SetToolTip(this.btnExport, "Export");
-            this.btnExport.UseVisualStyleBackColor = true;
-            this.btnExport.Click += new System.EventHandler(this.BtnClick);
-            // 
-            // btnUndo
-            // 
-            this.btnUndo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnUndo.Image = global::EnvManager.Properties.Resources.Undo;
-            this.btnUndo.Location = new System.Drawing.Point(588, 274);
-            this.btnUndo.Name = "btnUndo";
-            this.btnUndo.Size = new System.Drawing.Size(24, 21);
-            this.btnUndo.TabIndex = 16;
-            this.toolTip.SetToolTip(this.btnUndo, "Undo");
-            this.btnUndo.UseVisualStyleBackColor = true;
-            this.btnUndo.Click += new System.EventHandler(this.BtnClick);
-            // 
-            // btnRedo
-            // 
-            this.btnRedo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRedo.Image = global::EnvManager.Properties.Resources.Redo;
-            this.btnRedo.Location = new System.Drawing.Point(588, 301);
-            this.btnRedo.Name = "btnRedo";
-            this.btnRedo.Size = new System.Drawing.Size(24, 21);
-            this.btnRedo.TabIndex = 15;
-            this.toolTip.SetToolTip(this.btnRedo, "Redo");
-            this.btnRedo.UseVisualStyleBackColor = true;
-            this.btnRedo.Click += new System.EventHandler(this.BtnClick);
+            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancel.Image = global::EnvManager.Properties.Resources.Cancel;
+            this.btnCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnCancel.Location = new System.Drawing.Point(499, 359);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(83, 21);
+            this.btnCancel.TabIndex = 4;
+            this.btnCancel.Text = "&Cancel";
+            this.toolTip.SetToolTip(this.btnCancel, "Cancel Changes (Alt+F4)");
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.BtnClick);
             // 
             // openFileDialog
             // 
@@ -360,6 +387,8 @@ namespace EnvManager.Controls
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(622, 386);
+            this.Controls.Add(this.btnSortValues);
+            this.Controls.Add(this.btnDelDupes);
             this.Controls.Add(this.btnRedo);
             this.Controls.Add(this.btnUndo);
             this.Controls.Add(this.dgvValuesList);
@@ -418,5 +447,7 @@ namespace EnvManager.Controls
         private System.Windows.Forms.ToolStripMenuItem tsmiCopy;
         private System.Windows.Forms.ToolStripMenuItem tsmiPaste;
         private System.Windows.Forms.ToolStripMenuItem tsmiCut;
+        private System.Windows.Forms.Button btnDelDupes;
+        private System.Windows.Forms.Button btnSortValues;
     }
 }

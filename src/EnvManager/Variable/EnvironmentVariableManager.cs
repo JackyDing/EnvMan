@@ -2,6 +2,7 @@
  * EnvMan - The Open-Source Windows Environment Variables Manager
  * Copyright (C) 2006-2009 Vlad Setchin <envman-dev@googlegroups.com>
  * Copyright (C) 2013 Jacky Ding <jackyfire@gmail.com>
+ * Copyright (C) 2013 evorios <evorioss@gmail.com>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,12 +18,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 **/
 
+using Microsoft.Win32;
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Text;
+using System.Diagnostics;
+using System.IO;
 using System.Runtime.InteropServices;
-using Microsoft.Win32;
+using System.Security.Principal;
 
 namespace EnvManager.Variable
 {
@@ -64,8 +66,12 @@ namespace EnvManager.Variable
         /// <summary>
         /// Begin operate the environment variables.
         /// </summary>
-        public static void Begin()
+        public static void Begin(EnvironmentVariableTarget target)
         {
+            if(target == EnvironmentVariableTarget.Machine && !IsElevated)
+            {
+                cmd_filename = Path.GetTempFileName();
+            }
         }
 
         /// <summary>
@@ -77,7 +83,14 @@ namespace EnvManager.Variable
         public static void SetEnvironmentVariable(string name, string value, EnvironmentVariableTarget target)
         {
             ValidateVariables(name, value);
-            TargetKey(target).SetValue(name, value, value.Contains("%") ? RegistryValueKind.ExpandString : RegistryValueKind.String);
+            if (target == EnvironmentVariableTarget.Machine && !IsElevated)
+            {
+                File.AppendAllText(cmd_filename, string.Format("SETX {0} \"{1}\" /M\r\n", name, value));
+            }
+            else
+            {
+                TargetKey(target).SetValue(name, value, value.Contains("%") ? RegistryValueKind.ExpandString : RegistryValueKind.String);
+            }
         }
 
         /// <summary>
@@ -87,14 +100,37 @@ namespace EnvManager.Variable
         /// <param name="target">Type of the var.</param>
         public static void DeleteEnvironmentVariable(string name, EnvironmentVariableTarget target)
         {
-            TargetKey(target).DeleteValue(name);
+            if (target == EnvironmentVariableTarget.Machine && !IsElevated)
+            {
+                File.AppendAllText(cmd_filename, string.Format("REG delete \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Environment\" /F /V {0}\r\n", name));
+            }
+            else
+            {
+                TargetKey(target).DeleteValue(name);
+            }
         }
 
         /// <summary>
         /// End operate the environment variables.
         /// </summary>
-        public static void End()
+        public static void End(EnvironmentVariableTarget target)
         {
+            if (target == EnvironmentVariableTarget.Machine && !IsElevated)
+            {
+                File.Move(cmd_filename, cmd_filename + ".cmd");
+                cmd_filename = cmd_filename + ".cmd";
+
+                Process p = new Process();
+                p.StartInfo = new ProcessStartInfo(cmd_filename)
+                {
+                    Verb = "runas",
+                    UseShellExecute = true,
+                    WindowStyle = ProcessWindowStyle.Hidden
+                };
+                p.Start();
+                p.WaitForExit();
+                File.Delete(cmd_filename);
+            }
             int result;
             string s = "Environment";
             IntPtr ptrA = System.Runtime.InteropServices.Marshal.StringToHGlobalAnsi(s);
@@ -102,6 +138,10 @@ namespace EnvManager.Variable
             SendMessageTimeout((System.IntPtr)HWND_BROADCAST, WM_SETTINGCHANGE, 0, (int)ptrA, SMTO_ABORTIFHUNG, 5000, out result);
             SendMessageTimeout((System.IntPtr)HWND_BROADCAST, WM_SETTINGCHANGE, 0, (int)ptrU, SMTO_ABORTIFHUNG, 5000, out result);
         }
+
+        public static bool IsElevated => WindowsIdentity.GetCurrent().Owner.IsWellKnown(WellKnownSidType.BuiltinAdministratorsSid);
+
+        static string cmd_filename;
 
         #endregion Environment Variables Operation
 
