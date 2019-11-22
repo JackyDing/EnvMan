@@ -136,7 +136,11 @@
       <Name>EnvManager</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <PackageReference Include="ILMerge">
+      <Version>3.0.29</Version>
+    </PackageReference>
+  </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
       <Visible>False</Visible>
@@ -155,11 +159,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
+  <Target Name="ILMerge">
+    <Exec Command="$(ILMergeConsolePath) EnvMan.exe  /out:EnvMan_merged.exe EnvManager.dll " WorkingDirectory="..\..\bin\Release"/>
   </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+  <PropertyGroup>
+    <PostBuildEvent>"$(MSBuildBinPath)\msbuild.exe" /t:ILMerge ..\..\src\EnvMan\EnvMan.csproj</PostBuildEvent>
+  </PropertyGroup>
 </Project>
