@@ -442,13 +442,24 @@ namespace EnvManager.Controls
         private void LoadEnvironmentVariableValues()
         {
             this.dgvHandler.AddRows(this.variable.Value);
+            this.txtVariableValue.Text = this.variable.Value;
         }
 
         private void SaveEnvironmentVariable()
         {
             try
             {
-                StringBuilder value = EnvironmentVariableValue();
+                String value = "";
+
+                if (tabControl1.SelectedIndex == 0)
+                {
+                    value = EnvironmentVariableValue();
+                }
+                else
+                {
+                    value = this.txtVariableValue.Text;
+                }
+
                 if (variable.Name.Length != 0 && variable.Name != txtVariableName.Text)
                 {
                     if (snapshot.Name == "[Current]")
@@ -542,18 +553,24 @@ namespace EnvManager.Controls
         //PRANK!E code changes end here --> 
         #endregion Open in Windows Explorer
 
-        private StringBuilder EnvironmentVariableValue()
+        private String EnvironmentVariableValue()
         {
             StringBuilder value = new StringBuilder();    
             foreach (DataGridViewRow row in dgvValuesList.Rows)
             {
                 if (row.Index != dgvValuesList.Rows.Count - 1)
                 {
-                    value.Append(row.Cells[1].Value.ToString() + (row.Index < dgvValuesList.Rows.Count - 2 ? ";" : ""));
-                    System.Diagnostics.Debug.WriteLine(value.ToString());
+                    if (row.Cells[1].Value != null)
+                    {
+                        value.Append(row.Cells[1].Value.ToString() + (row.Index < dgvValuesList.Rows.Count - 2 ? ";" : ""));
+                    }
+                    else
+                    {
+                        value.Append(row.Index < dgvValuesList.Rows.Count - 2 ? ";" : "");
+                    }
                 }
             }
-            return value;
+            return value.ToString();
         }
 
         #endregion Environment Variables
@@ -570,7 +587,8 @@ namespace EnvManager.Controls
             DataGridView dgv = (DataGridView)sender;
 
             if (e.RowIndex < dgv.Rows.Count - 1)
-            {   // don't look at last row
+            {
+                // don't look at last row
                 string dgvValue = string.Empty;
                 
                 if (e.ColumnIndex == 0) 
@@ -582,12 +600,7 @@ namespace EnvManager.Controls
                     dgvValue = e.FormattedValue.ToString();
                 }
 
-                if (dgvValue == string.Empty)
-                {
-                    dgvValuesList.Rows[e.RowIndex].ErrorText = "Value cannot be empty";
-                    e.Cancel = true;
-                }
-                else if (dgvValue.Contains(";"))
+                if (dgvValue.Contains(";"))
                 {
                     dgvValuesList.Rows[e.RowIndex].ErrorText = "Value cannot contain ';'";
                     e.Cancel = true;
@@ -735,5 +748,23 @@ namespace EnvManager.Controls
             settings.Save();
         }
         #endregion Settings  
+
+        private void tabControl1_TabIndexChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (tabControl1.SelectedIndex)
+            {
+                case 0:
+                    this.dgvValuesList.Rows.Clear();
+                    this.dgvHandler.AddRows(this.txtVariableValue.Text);
+                    break;
+                case 1:
+                    this.txtVariableValue.Text = EnvironmentVariableValue();
+                    break;
+            }
+        }
     }
 }
