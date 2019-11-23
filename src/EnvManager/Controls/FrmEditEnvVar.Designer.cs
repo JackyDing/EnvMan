@@ -443,6 +443,7 @@ namespace EnvManager.Controls
             this.txtVariableValue.Location = new System.Drawing.Point(3, 3);
             this.txtVariableValue.Multiline = true;
             this.txtVariableValue.Name = "txtVariableValue";
+            this.txtVariableValue.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtVariableValue.Size = new System.Drawing.Size(659, 497);
             this.txtVariableValue.TabIndex = 0;
             // 

@@ -54,9 +54,7 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup />
-  <PropertyGroup>
-    <ApplicationManifest>app.manifest</ApplicationManifest>
-  </PropertyGroup>
+  <PropertyGroup />
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
@@ -118,7 +116,6 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -160,7 +157,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="ILMerge">
-    <Exec Command="$(ILMergeConsolePath) EnvMan.exe  /out:EnvMan_merged.exe EnvManager.dll " WorkingDirectory="..\..\bin\Release"/>
+    <Exec Command="$(ILMergeConsolePath) EnvMan.exe  /out:EnvMan_merged.exe EnvManager.dll " WorkingDirectory="..\..\bin\Release" />
   </Target>
   <PropertyGroup>
     <PostBuildEvent>"$(MSBuildBinPath)\msbuild.exe" /t:ILMerge ..\..\src\EnvMan\EnvMan.csproj</PostBuildEvent>

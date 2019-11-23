@@ -459,7 +459,7 @@ namespace EnvManager.Controls
                 {
                     value = this.txtVariableValue.Text;
                 }
-
+                
                 if (variable.Name.Length != 0 && variable.Name != txtVariableName.Text)
                 {
                     if (snapshot.Name == "[Current]")

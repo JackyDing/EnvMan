@@ -188,10 +188,6 @@ namespace EnvManager.Variable
             {
                 throw new ArgumentException("Variable Name cannot be blank.");
             }
-            if (value != null && value == "")
-            {
-                throw new ArgumentException("Variable should have a value.");
-            }
         }
         #endregion Validation   
     }
