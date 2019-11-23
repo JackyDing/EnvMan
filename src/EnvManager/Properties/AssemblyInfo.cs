@@ -37,9 +37,9 @@ using System.Runtime.InteropServices;
 // set here build version,
 // use x.x.x.* format for final releases
 // or x.x.x.n format for beta releases
-[assembly: AssemblyVersion("2.0.0.2")]
-[assembly: AssemblyFileVersion("2.0.0.2")]
-[assembly: AssemblyInformationalVersion("2.0.0.2")]
+[assembly: AssemblyVersion("2.1.1.0")]
+[assembly: AssemblyFileVersion("2.1.1.0")]
+[assembly: AssemblyInformationalVersion("2.1.1.0")]
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
