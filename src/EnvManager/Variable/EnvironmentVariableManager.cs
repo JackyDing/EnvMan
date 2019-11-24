@@ -85,7 +85,7 @@ namespace EnvManager.Variable
             ValidateVariables(name, value);
             if (target == EnvironmentVariableTarget.Machine && !IsElevated)
             {
-                File.AppendAllText(cmd_filename, string.Format("SETX {0} \"{1}\" /M\r\n", name, value));
+                File.AppendAllText(cmd_filename, string.Format("[Environment]::SetEnvironmentVariable('{0}','{1}','Machine')\r\n", name, value));
             }
             else
             {
@@ -102,7 +102,7 @@ namespace EnvManager.Variable
         {
             if (target == EnvironmentVariableTarget.Machine && !IsElevated)
             {
-                File.AppendAllText(cmd_filename, string.Format("REG delete \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Environment\" /F /V {0}\r\n", name));
+                File.AppendAllText(cmd_filename, string.Format("[Environment]::SetEnvironmentVariable('{0}',$NULL,'Machine')\r\n", name));
             }
             else
             {
@@ -117,14 +117,15 @@ namespace EnvManager.Variable
         {
             if (target == EnvironmentVariableTarget.Machine && !IsElevated)
             {
-                File.Move(cmd_filename, cmd_filename + ".cmd");
-                cmd_filename = cmd_filename + ".cmd";
+                File.Move(cmd_filename, cmd_filename + ".ps1");
+                cmd_filename = cmd_filename + ".ps1";
 
                 Process p = new Process();
-                p.StartInfo = new ProcessStartInfo(cmd_filename)
+                p.StartInfo = new ProcessStartInfo("cmd.exe")
                 {
-                    Verb = "runas",
+                    Verb = "RunAs",
                     UseShellExecute = true,
+                    Arguments = string.Format("/c powershell.exe -NoProfile -ExecutionPolicy Bypass -File \"{0}\"", cmd_filename),
                     WindowStyle = ProcessWindowStyle.Hidden
                 };
                 p.Start();
