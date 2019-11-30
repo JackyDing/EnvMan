@@ -201,7 +201,7 @@ namespace EnvManager
                     {
                         EnvironmentVariable variable = new EnvironmentVariable();
                         variable.Name = entry.Key.ToString();
-                        variable.Value = entry.Value.ToString();
+                        variable.Value = EnvironmentVariableManager.GetEnvironmentVariable(variable.Name, (EnvironmentVariableTarget)lb.Tag);
                         snapshot.Variables.Add(variable);
                     }
                     if (snapshotManager.AppendSnapshot(snapshot))
