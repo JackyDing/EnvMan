@@ -43,16 +43,6 @@ namespace EnvManager.Variable
         }
 
         /// <summary>
-        /// Expand the environment variable.
-        /// </summary>
-        /// <param name="name">Name of the variable.</param>
-        /// <returns></returns>
-        public static string ExpandEnvironmentVariable(string name)
-        {
-            return Environment.ExpandEnvironmentVariables(name);
-        }
-        
-        /// <summary>
         /// Gets the environment variable.
         /// </summary>
         /// <param name="name">Name of the variable.</param>
@@ -60,7 +50,15 @@ namespace EnvManager.Variable
         /// <returns></returns>
         public static string GetEnvironmentVariable(string name, EnvironmentVariableTarget target)
         {
-            return TargetKey(target).GetValue(name).ToString();
+            switch (target)
+            {
+                case EnvironmentVariableTarget.Machine:
+                    return Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\Control\Session Manager\Environment")
+                        .GetValue(name, "", RegistryValueOptions.DoNotExpandEnvironmentNames).ToString();
+                default:
+                    return Registry.CurrentUser.OpenSubKey("Environment")
+                        .GetValue(name, "", RegistryValueOptions.DoNotExpandEnvironmentNames).ToString();
+            }
         }
 
         /// <summary>
@@ -83,13 +81,22 @@ namespace EnvManager.Variable
         public static void SetEnvironmentVariable(string name, string value, EnvironmentVariableTarget target)
         {
             ValidateVariables(name, value);
-            if (target == EnvironmentVariableTarget.Machine && !IsElevated)
+            switch (target)
             {
-                File.AppendAllText(cmd_filename, string.Format("[Environment]::SetEnvironmentVariable('{0}','{1}','Machine')\r\n", name, value));
-            }
-            else
-            {
-                TargetKey(target).SetValue(name, value, value.Contains("%") ? RegistryValueKind.ExpandString : RegistryValueKind.String);
+                case EnvironmentVariableTarget.Machine when !IsElevated:
+                    File.AppendAllText(cmd_filename, string.Format(
+                        @"[void]$(New-ItemProperty -Path 'HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Environment' -Force"+" "+
+                        "-Name '{0}' -Value '{1}' -PropertyType '{2}')\r\n", name, value, value.Contains("%") ? "ExpandString" : "String"));
+                    break;
+                case EnvironmentVariableTarget.Machine:
+                    Registry.LocalMachine.OpenSubKey(
+                        @"SYSTEM\CurrentControlSet\Control\Session Manager\Environment", true)
+                        .SetValue(name, value, value.Contains("%") ? RegistryValueKind.ExpandString : RegistryValueKind.String);
+                    break;
+                default:
+                    Registry.CurrentUser.OpenSubKey(@"Environment", true)
+                        .SetValue(name, value, value.Contains("%") ? RegistryValueKind.ExpandString : RegistryValueKind.String);
+                    break;
             }
         }
 
@@ -100,13 +107,22 @@ namespace EnvManager.Variable
         /// <param name="target">Type of the var.</param>
         public static void DeleteEnvironmentVariable(string name, EnvironmentVariableTarget target)
         {
-            if (target == EnvironmentVariableTarget.Machine && !IsElevated)
+            switch (target)
             {
-                File.AppendAllText(cmd_filename, string.Format("[Environment]::SetEnvironmentVariable('{0}',$NULL,'Machine')\r\n", name));
-            }
-            else
-            {
-                TargetKey(target).DeleteValue(name);
+                case EnvironmentVariableTarget.Machine when !IsElevated:
+                    File.AppendAllText(cmd_filename, string.Format(
+                        @"[void]$(Remove-ItemProperty -Path 'HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Environment'" +
+                        " " + "-Name '{0}' -Force)\r\n", name));
+                    break;
+                case EnvironmentVariableTarget.Machine:
+                    Registry.LocalMachine.OpenSubKey(
+                        @"SYSTEM\CurrentControlSet\Control\Session Manager\Environment", true)
+                        .DeleteValue(name);
+                    break;
+                default:
+                    Registry.CurrentUser.OpenSubKey(@"Environment", true)
+                        .DeleteValue(name);
+                    break;
             }
         }
 
@@ -161,7 +177,7 @@ namespace EnvManager.Variable
             }
             else
             {
-                return Registry.LocalMachine.OpenSubKey("SYSTEM").OpenSubKey("CurrentControlSet").OpenSubKey("Control").OpenSubKey("Session Manager").OpenSubKey("Environment", true);
+                return Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\Control\Session Manager\Environment", true);
             }
         }
         

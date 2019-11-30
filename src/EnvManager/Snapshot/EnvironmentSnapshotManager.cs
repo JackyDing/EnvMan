@@ -46,7 +46,7 @@ namespace EnvManager.Snapshot
             {
                 EnvironmentVariable variable = new EnvironmentVariable();
                 variable.Name = entry.Key.ToString();
-                variable.Value = entry.Value.ToString();
+                variable.Value = EnvironmentVariableManager.GetEnvironmentVariable(variable.Name, usrTarget);
                 usrSnapshot.Variables.Add(variable);
             }
             usrSnapshots.Add(usrSnapshot);
@@ -69,7 +69,7 @@ namespace EnvManager.Snapshot
             {
                 EnvironmentVariable variable = new EnvironmentVariable();
                 variable.Name = entry.Key.ToString();
-                variable.Value = entry.Value.ToString();
+                variable.Value = EnvironmentVariableManager.GetEnvironmentVariable(variable.Name, sysTarget);
                 sysSnapshot.Variables.Add(variable);
             }
             sysSnapshots.Add(sysSnapshot);
